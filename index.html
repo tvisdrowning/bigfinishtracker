@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Big Finish Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="title-block">
+      <div class="eyebrow">Doctor Who audio library companion</div>
+      <h1>Big Finish Tracker</h1>
+      <p class="lede">Track your listening progress across main Doctors, series, and sub-series. The catalogue now syncs directly from the abs-agg Big Finish metadata provider with a bundled fallback for offline use.</p>
+      <p id="provider-status" class="provider-status">Connecting to metadata provider…</p>
+      <button id="sync-provider" class="button">Sync from metadata provider</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="filters card">
+      <h2>Filters</h2>
+      <div class="filter-grid">
+        <label class="filter">
+          <span>Doctor</span>
+          <select id="doctor-filter"></select>
+        </label>
+        <label class="filter">
+          <span>Series</span>
+          <select id="series-filter"></select>
+        </label>
+        <label class="filter">
+          <span>Sub-series</span>
+          <select id="subseries-filter"></select>
+        </label>
+        <label class="filter search">
+          <span>Search title</span>
+          <input id="search-filter" type="search" placeholder="Search releases or stories" />
+        </label>
+      </div>
+    </section>
+
+    <section class="progress-panel">
+      <div class="card progress-card" id="overall-card">
+        <div class="card-title">Overall progress</div>
+        <div class="progress-row">
+          <div class="progress-percentage" id="overall-percent">0%</div>
+          <div class="progress-bar">
+            <span id="overall-bar" style="width: 0%"></span>
+          </div>
+        </div>
+        <div class="progress-subtext" id="overall-count">0 of 0 stories completed</div>
+      </div>
+
+      <div class="card stacked" id="doctor-progress">
+        <div class="card-title">Completion by Doctor</div>
+        <div class="stacked-list" id="doctor-progress-list"></div>
+      </div>
+
+      <div class="card stacked" id="series-progress">
+        <div class="card-title">Completion by Series</div>
+        <div class="stacked-list" id="series-progress-list"></div>
+      </div>
+    </section>
+
+    <section class="catalogue card">
+      <div class="card-title with-count">Release catalogue <span id="release-count">0 results</span></div>
+      <div class="release-list" id="release-list"></div>
+    </section>
+  </main>
+
+  <template id="release-template">
+    <article class="release">
+      <header class="release-header">
+        <div>
+          <p class="eyebrow"></p>
+          <h3 class="release-title"></h3>
+          <p class="meta"></p>
+        </div>
+        <label class="listen-toggle">
+          <input type="checkbox" class="release-checkbox" />
+          <span>Mark release listened</span>
+        </label>
+      </header>
+      <div class="release-body">
+        <img class="cover" alt="" />
+        <div class="release-copy">
+          <p class="release-description"></p>
+          <p class="release-stats"></p>
+          <ul class="story-list"></ul>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <template id="progress-row-template">
+    <div class="stacked-row">
+      <div class="label"></div>
+      <div class="bar"><span></span></div>
+      <div class="value"></div>
+    </div>
+  </template>
+
+  <script src="stories.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
